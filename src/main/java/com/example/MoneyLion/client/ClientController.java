@@ -21,17 +21,25 @@ public class ClientController {
         return clientService.getClient();
     }
 
-    @GetMapping(path="featureAccessibility")
+    @GetMapping(path="feature")
     public ClientFeatureResponse featureResponse
             (@RequestParam String featureName,
              @RequestParam String email){
         return clientService.featureResponse(featureName,email);
-//        return clientService.featureAccessibility();
     }
 
-    @PostMapping(path = "new")
+    @PostMapping(path = "feature")
     public void registerNewClient
             (@RequestBody Client client){
         clientService.addNewClient(client);
+    }
+
+    @PutMapping(path="featureSwitch")
+    public void updateClient(
+        @RequestParam String featureName,
+        @RequestParam String email,
+        @RequestParam(required = false) Boolean enable){
+        clientService.updateClient(featureName,email,enable);
+
     }
 }
